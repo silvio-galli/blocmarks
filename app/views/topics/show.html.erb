@@ -9,6 +9,17 @@
 <br />
 <div class="row">
   <div class="col-md-8">
+    <% @topic.bookmarks.each do |bookmark| %>
+      <div class="media">
+        <div class="media-body">
+            <p style="<%= random_color("background-color") %>">
+              <%= link_to  bookmark.url do %>
+                <%= bookmark.description %>
+              <% end %>
+            </p>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
   </div>
