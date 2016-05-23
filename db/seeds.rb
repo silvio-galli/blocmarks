@@ -5,18 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-me = User.create!(
-  user_name:          "Fake",
-  email:              "fake@example.com",
-  password:           "password"
-)
-
-member = User.create!(
-  user_name:          "Member User",
-  email:              "member@example.com",
-  password:           "password"
-)
-
 5.times do
   user = User.create!(
     user_name: Faker::Name.first_name,
@@ -34,17 +22,29 @@ users = User.all
   )
 end
 
+me = User.create!(
+  user_name:          "Fake",
+  email:              "fake@example.com",
+  password:           "password"
+)
+
+member = User.create!(
+  user_name:          "Member User",
+  email:              "member@example.com",
+  password:           "password"
+)
+
 10.times do
   topic = Topic.create!(
     title: Faker::Hipster.word,
-    user_id: "1"
+    user_id: "6"
   )
 end
 
 10.times do
   topic = Topic.create!(
     title: Faker::Hipster.word,
-    user_id: "2"
+    user_id: "7"
   )
 end
 
