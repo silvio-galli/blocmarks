@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521152828) do
+ActiveRecord::Schema.define(version: 20160523075327) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string   "url"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160521152828) do
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
   create_table "users", force: :cascade do |t|
+    t.string   "user_name",                           null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
