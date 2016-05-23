@@ -21,3 +21,13 @@
 .media p a {
   color: #fff;
 }
+
+@mixin random-color($selector) {
+  #{$selector}: unquote("rgb(#{random(256) - 1}, #{random(256) - 1}, #{random(256) - 1})");
+}
+
+@for $i from 1 to 11 {
+  .bg-color-#{$i} {
+    @include random-color('background-color');
+  }
+}

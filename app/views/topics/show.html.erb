@@ -12,7 +12,7 @@
     <% @topic.bookmarks.each do |bookmark| %>
       <div class="media">
         <div class="media-body">
-            <p style="<%= random_color("background-color") %>">
+            <p class="<%= random_class %>">
               <%= link_to  bookmark.url do %>
                 <%= bookmark.description %>
               <% end %>
