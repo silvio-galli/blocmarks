@@ -48,6 +48,17 @@ end
   )
 end
 
+topics = Topic.all
+
+100.times do
+  bookmark = Bookmark.create!(
+    url: Faker::Internet.url,
+    description: Faker::Hipster.sentence(4, false, 5),
+    user: users.sample,
+    topic: topics.sample
+  )
+end
+
 puts "Seed finished!"
 puts "Blocmarks was populated with #{User.count} new users."
 puts "Blocmarks was populated with #{Topic.count} new topics."
