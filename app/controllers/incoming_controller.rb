@@ -13,25 +13,23 @@ class IncomingController < ApplicationController
     end
 
     # Find the topic by using params[:subject]
-    if params[:subject] == ""                         # if params[:subject] is empty
-      topic = Topic.where(title: "no topic")          # topic is assigned to "no topic"
-    else                                              # if params[:subject] is NOT empty, use it as topic
-      topic = Topic.find_by(title: params[:subject])  # assign topic to params[:subject]
-      if topic == nil || topic == []                  # if params[:subject] is not a topic already existent, it returns nil or []
-        topic = Topic.create(                         # so create a new topic based on params[:subject]
-          title: params[:subject],
-          user_id: user.id
-          )
-      end
+    topic = Topic.find_by(title: params[:subject])
+    if topic == nil || topic == []                  # if params[:subject] is not a topic already existent, it returns nil or []
+      topic = Topic.create(                         # so create a new topic based on params[:subject]
+        title: params[:subject],
+        user_id: user.id
+        )
+    elsif topic == ""                               # if topic is empty string
+      topic = Topic.where(title: "no topic")        # topic is assigned to "no topic"
     end
 
-    email_body = params["body-plain"]                 # assign params["body-plain"] to a variable
-    body_strings = email_body.split(/\r\n/)           # split the variable based on carriage return
-    if body_strings.count != 0                        # if the resulting array as more than one element
-      url = body_strings[0]                           # assign the first line to url
-      description = body_strings[1]                   # the second line to description
-    else                                              # if only one line is present in the email body
-      url = params["body-plain"]                      # this is assigned to url, and assign something to description
+    email_body = params["body-plain"]               # assign params["body-plain"] to a variable
+    body_strings = email_body.split(/\r\n/)         # split the variable based on carriage return
+    if body_strings.count > 1                       # if the resulting array as more than one element
+      url = body_strings[0]                         # assign the first line to url
+      description = body_strings[1]                 # the second line to description
+    else                                            # if only one line is present in the email body
+      url = params["body-plain"]                    # this is assigned to url, and assign something to description
       description = "sent from email, no description provided"
     end
 
