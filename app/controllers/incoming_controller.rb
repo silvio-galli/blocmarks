@@ -14,7 +14,7 @@ class IncomingController < ApplicationController
 
     # Find the topic by using params[:subject]
     if params[:subject] == ""                         # if topic is empty string
-      topic = Topic.where(title: "no topic")          # topic is assigned to "no topic"
+      topic = Topic.find_by(title: "no topic")        # topic is assigned to "no topic"
     else
       topic = Topic.find_by(title: params[:subject])
       if topic == nil                                 # if params[:subject] is not a topic already existent, it returns nil or []
