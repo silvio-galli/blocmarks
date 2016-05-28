@@ -25,10 +25,19 @@ class IncomingController < ApplicationController
       end
     end
 
-    url = params["body-plain"]                        # Assign the url to a variable after retreiving it from params["body-plain"]
+    email_body = params["body-plain"]                 # assign params["body-plain"] to a variable
+    body_strings = email_body.split(/\r\n/)           # split the variable based on carriage return
+    if body_strings.count != 0                        # if the resulting array as more than one element
+      url = body_strings[0]                           # assign the first line to url
+      description = body_strings[1]                   # the second line to description
+    else                                              # if only one line is present in the email body
+      url = params["body-plain"]                      # this is assigned to url, and assign something to description
+      description = "sent from email, no description provided"
+    end
 
     bookmark = topic.bookmarks.build(                 # Now that you're sure you have a valid user and topic, build and save a new bookmark
       url: url,
+      description: description,
       user_id: user.id
     )
     bookmark.save

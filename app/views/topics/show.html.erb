@@ -14,7 +14,7 @@
         <div class="media-body">
             <p class="<%= random_class %>">
               <%= link_to  bookmark.url do %>
-                <%= bookmark.description %>
+                <%= if bookmark.description ? bookmark.description : bookmark.url %>
               <% end %>
             </p>
             <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
