@@ -25,7 +25,7 @@ class IncomingController < ApplicationController
       # assign topic = "no topic"
       if topic == nil
         topic = Topic.where(title: "no topic")
-        bookmark.topic = topic
+        bookmark.topic_id = topic.id
       else
         bookmark.topic = topic
       end
