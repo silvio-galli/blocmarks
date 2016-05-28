@@ -41,6 +41,11 @@ member = User.create!(
   )
 end
 
+topic = Topic.create!(
+  title: "no topic",
+  user_id: "6"
+)
+
 10.times do
   topic = Topic.create!(
     title: Faker::Hipster.word,
