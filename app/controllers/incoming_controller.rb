@@ -13,14 +13,16 @@ class IncomingController < ApplicationController
     end
 
     # Find the topic by using params[:subject]
-    topic = Topic.find_by(title: params[:subject])
-    if topic == nil || topic == []                  # if params[:subject] is not a topic already existent, it returns nil or []
-      topic = Topic.create(                         # so create a new topic based on params[:subject]
-        title: params[:subject],
-        user_id: user.id
+    if params[:subject] == ""                         # if topic is empty string
+      topic = Topic.where(title: "no topic")          # topic is assigned to "no topic"
+    else
+      topic = Topic.find_by(title: params[:subject])
+      if topic == nil                                 # if params[:subject] is not a topic already existent, it returns nil or []
+        topic = Topic.create(                         # so create a new topic based on params[:subject]
+          title: params[:subject],
+          user_id: user.id
         )
-    elsif topic == ""                               # if topic is empty string
-      topic = Topic.where(title: "no topic")        # topic is assigned to "no topic"
+      end
     end
 
     email_body = params["body-plain"]               # assign params["body-plain"] to a variable
