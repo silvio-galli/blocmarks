@@ -6,8 +6,13 @@
       <%= devise_error_messages! %>
 
       <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Enter your email address' %>
+        <%= f.label :user_name %>
+        <%= f.text_field :user_name, autofocus: true, class: 'form-control', placeholder: 'Enter the name displayed in Blocmarks' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control', placeholder: 'Enter your email address' %>
       </div>
 
       <div class="from-group">
@@ -20,7 +25,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'confirm password' %>
       </div>
 

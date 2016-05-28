@@ -9,7 +9,21 @@
 <br />
 <div class="row">
   <div class="col-md-8">
+    <% @topic.bookmarks.each do |bookmark| %>
+      <div class="media">
+        <div class="media-body">
+            <p class="<%= random_class %>">
+              <%= link_to  bookmark.url do %>
+                <%= bookmark.description %>
+              <% end %>
+            </p>
+            <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
+            <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-4">
+    <%= link_to "New Bookmark", new_topic_bookmark_path(@topic), class: 'btn btn-primary' %>
   </div>
 </div>

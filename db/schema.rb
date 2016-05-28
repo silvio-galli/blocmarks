@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521091419) do
+ActiveRecord::Schema.define(version: 20160523075327) do
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "url",        null: false
+    t.string   "url"
     t.text     "description"
     t.integer  "topic_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   add_index "bookmarks", ["topic_id"], name: "index_bookmarks_on_topic_id"
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
 
   create_table "topics", force: :cascade do |t|
-    t.string   "title",      null: false
+    t.string   "title"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160521091419) do
   add_index "topics", ["user_id"], name: "index_topics_on_user_id"
 
   create_table "users", force: :cascade do |t|
+    t.string   "user_name",                           null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

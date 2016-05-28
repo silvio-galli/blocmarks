@@ -1,4 +1,6 @@
 class TopicsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+
   def index
     @topics = Topic.all
   end
@@ -36,6 +38,17 @@ class TopicsController < ApplicationController
     else
       flash[:alert] = "Topic not updated. Please try again."
       render :edit
+    end
+  end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+    if @topic.destroy
+      flash[:notice] = "\"#{@topic.title}\" was successfully deleted."
+      redirect_to topics_path
+    else
+      flash[:alert] = "Topic was NOT deleted. Please try again."
+      render :show
     end
   end
 end
