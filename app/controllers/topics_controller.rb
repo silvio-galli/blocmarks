@@ -7,15 +7,20 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    authorize @topic
   end
 
   def new
     @topic = Topic.new
+    authorize @topic
   end
 
   def create
     @topic = Topic.new
-    @topic[:title] = params[:topic][:title]
+    authorize @topic
+    @topic.title = params[:topic][:title]
+    @topic.user = current_user
+    @topic
     if @topic.save
       flash[:notice] = "Topic successfully created!"
       redirect_to topic_path(@topic)
@@ -27,11 +32,13 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    authorize @topic
   end
 
   def update
     @topic = Topic.find(params[:id])
-    @topic[:title] = params[:topic][:title]
+    authorize @topic
+    @topic.title = params[:topic][:title]
     if @topic.save
       flash[:notice] = "Topic successfully updated!"
       redirect_to topic_path(@topic)
@@ -43,6 +50,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic = Topic.find(params[:id])
+    authorize @topic
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" was successfully deleted."
       redirect_to topics_path
