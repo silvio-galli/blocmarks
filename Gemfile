@@ -21,6 +21,7 @@ gem 'figaro'
 gem 'pry'
 gem 'devise'
 gem 'faker'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'
