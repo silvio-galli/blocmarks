@@ -1,17 +1,19 @@
-<h1>
-  <%= @bookmark.url %>
-    <span>
-      <%= link_to "Edit", edit_bookmark_path(@bookmark), class: 'btn btn-primary', title: 'Click to modify this bookmark' %>
-      <%= link_to "Delete", @bookmark, method: :delete, class: 'btn btn-danger', title: 'Click to delete this bookmark',
-                                            data: { confirm: "Are you sure you want to delete this Bookmark?"} %>
-    </span>
-</h1>
+<h2><%= @bookmark.description %></h2>
+<div class="buttons">
+  <% if policy(@bookmark).edit? %>
+    <%= link_to "Edit", edit_bookmark_path(@bookmark), class: 'btn btn-primary', title: 'Click to modify this bookmark' %>
+  <% end %>
+  <% if policy(@bookmark).destroy? %>
+    <%= link_to "Delete", @bookmark, method: :delete, class: 'btn btn-danger', title: 'Click to delete this bookmark',
+                                                    data: { confirm: "Are you sure you want to delete this Bookmark?"} %>
+  <% end %>
+</div>
 <br />
 <div class="row">
   <div class="col-md-8">
-    <p>
-      <%= @bookmark.description %>
-    </p>
+    <h1>
+      <%= link_to "#{@bookmark.url}", @bookmark.url %>
+    </h1>
   </div>
   <div class="col-md-4">
   </div>

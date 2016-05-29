@@ -3,7 +3,7 @@
     <span>
       <%= link_to "Edit", edit_topic_path(@topic), class: 'btn btn-primary', title: 'Click to modify this topic' %>
       <%= link_to "Delete", @topic, method: :delete, class: 'btn btn-danger', title: 'Click to delete this topic',
-                                            data: { confirm: "Are tyou sure you want to delete this Topic?"} %>
+                                            data: { confirm: "Are you sure you want to delete this Topic?" } %>
     </span>
 </h1>
 <br />
@@ -14,11 +14,18 @@
         <div class="media-body">
             <p class="<%= random_class %>">
               <%= link_to  bookmark.url do %>
-                <%= bookmark.description ? bookmark.description : bookmark.url %>
+                <%= bookmark.description ? excerpt(bookmark.description, ' ', radius: 20) : bookmark.url %>
               <% end %>
             </p>
-            <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
-            <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+            <% if policy(bookmark).show? %>
+              <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
+            <% end %>
+            <% if policy(bookmark).edit? %>
+              <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+            <% end %>
+            <% if policy(bookmark).destroy? %>
+              <small><%= link_to "Delete", bookmark, method: :delete, data: { confirm: "Are you sure you want to delete this bookmark?" } %></small>
+            <% end %>
         </div>
       </div>
     <% end %>
