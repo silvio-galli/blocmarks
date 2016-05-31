@@ -7,22 +7,16 @@ class IncomingController < ApplicationController
     # Find the user by using params[:sender]
     user = User.find_by(email: params[:sender])
     # Check if user is nil
-    if user == nil || user == []
-      # some actions to take if user is nil
+    if user.nil?
+      # TODO some actions to take if user is nil
       # e.i. send back an email
     end
 
     # Find the topic by using params[:subject]
-    if params[:subject] == ""                         # if topic is empty string
-      topic = Topic.find_by(title: "no topic")        # topic is assigned to "no topic"
+    if params[:subject] == ""                             # if topic is empty string
+      topic = Topic.find_or_create_by(title: "no topic")  # topic is assigned to "no topic"
     else
-      topic = Topic.find_by(title: params[:subject])
-      if topic == nil                                 # if params[:subject] is not a topic already existent, it returns nil or []
-        topic = Topic.create(                         # so create a new topic based on params[:subject]
-          title: params[:subject],
-          user_id: user.id
-        )
-      end
+      topic = Topic.find_or_create_by(title: params[:subject].downcase, user: user)
     end
 
     email_body = params["body-plain"]               # assign params["body-plain"] to a variable
@@ -40,10 +34,14 @@ class IncomingController < ApplicationController
       description: description,
       user_id: user.id
     )
-    bookmark.save
-
-    # Assuming all went well.
-    head 200
+    if bookmark.save
+      # Assuming all went well.
+      head 200
+      # TODO implement sending email to confirm everything went well
+    else
+      head 400
+      # TODO implement sending email to inform something went wrong
+    end
   end
 
 end
