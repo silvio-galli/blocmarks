@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :bookmarks
   has_many :likes
+
+  def liked?(bookmark)
+    bookmark.likes.where(user_id: id).any?
+  end
 end

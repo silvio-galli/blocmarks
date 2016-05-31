@@ -1,4 +1,4 @@
-<h2><%= @bookmark.description %></h2>
+<h1><%= link_to "#{@bookmark.url}", @bookmark.url %></h1>
 <div class="buttons">
   <% if policy(@bookmark).edit? %>
     <%= link_to "Edit", edit_bookmark_path(@bookmark), class: 'btn btn-primary', title: 'Click to modify this bookmark' %>
@@ -11,9 +11,9 @@
 <br />
 <div class="row">
   <div class="col-md-8">
-    <h1>
-      <%= link_to "#{@bookmark.url}", @bookmark.url %>
-    </h1>
+    <p class="lead">
+      <%= @bookmark.description %>
+    </p>
   </div>
   <div class="col-md-4">
   </div>

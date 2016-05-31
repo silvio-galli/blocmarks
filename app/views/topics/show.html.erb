@@ -14,20 +14,35 @@
     <% @topic.bookmarks.each do |bookmark| %>
       <div class="media">
         <div class="media-body">
-            <p class="<%= random_class %>">
-              <%= link_to  bookmark.url do %>
-                <%= bookmark.description ? excerpt(bookmark.description, ' ', radius: 20) : bookmark.url %>
-              <% end %>
-            </p>
-            <% if policy(bookmark).show? %>
-              <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
+          <!-- CRUD -->
+          <% if policy(bookmark).show? %>
+            <small><%= link_to "Show", bookmark_path(bookmark.id) %></small>
+          <% end %>
+
+          <% if policy(bookmark).edit? %>
+            | <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small> |
+          <% end %>
+          <% if policy(bookmark).destroy? %>
+            <small><%= link_to "Delete", bookmark, method: :delete, data: { confirm: "Are you sure you want to delete this bookmark?" } %></small>
+          <% end %>
+
+          <p class="<%= random_class %>">
+            <%= link_to  bookmark.url do %>
+              <%= bookmark.description ? excerpt(bookmark.description, ' ', radius: 20) : bookmark.url %>
             <% end %>
-            <% if policy(bookmark).edit? %>
-              <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+          </p>
+
+          <!-- Like/Unlike -->
+          <% if current_user.liked?(bookmark) %>
+            <% like = current_user.likes.where(bookmark_id: bookmark).take %>
+            <%= link_to bookmark_like_path(bookmark, like), method: :delete, class: 'btn btn-danger', title: "Unlike this bookmark." do %>
+              <i class="glyphicon glyphicon-star-empty"> </i>&nbsp;Unlike
             <% end %>
-            <% if policy(bookmark).destroy? %>
-              <small><%= link_to "Delete", bookmark, method: :delete, data: { confirm: "Are you sure you want to delete this bookmark?" } %></small>
+          <% else %>
+            <%= link_to bookmark_likes_path(bookmark), method: :post, class: 'btn btn-primary', title: "Like this bookmark." do %>
+              <i class="glyphicon glyphicon-star"> </i>&nbsp;Like
             <% end %>
+          <% end %>
         </div>
       </div>
     <% end %>
