@@ -10,6 +10,7 @@
 }
 .media p {
   display: block;
+  position: relative;
   width: 120px;
   height: 120px;
   padding: 10px;
@@ -20,6 +21,9 @@
 }
 .media p a {
   color: #fff;
+}
+.media .btn {
+  width: 120px;
 }
 
 @mixin random-color($selector) {
