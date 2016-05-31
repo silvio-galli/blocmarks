@@ -20,6 +20,8 @@ gem 'bootstrap-sass'
 gem 'figaro'
 gem 'pry'
 gem 'devise'
+gem 'faker'
+gem 'pundit'
 
 group :development, :test do
   gem 'byebug'
@@ -27,6 +29,5 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'shoulda'
-  gem 'faker'
   gem 'factory_girl_rails'
 end

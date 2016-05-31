@@ -19,3 +19,6 @@
 # Ignore secret keys files
 /config/secrets.yml
 /config/application.yml
+
+# Ignore external resources
+general_settings
