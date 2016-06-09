@@ -1,0 +1,29 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.my-page h2 {
+  text-transform: uppercase;
+  font-family: monospace;
+}
+
+.my-page h3 {
+  display: inline-block;
+  padding: 3px 5px;
+  color: #fff;
+  background-color: #000;
+}
+.my-page .btn-default {
+}
+.my-page ul {
+  padding-left: 0;
+}
+.my-page ul li {
+  list-style: none;
+  padding-right: 25%;
+}
+.crud {
+  color: #777;
+}
+.crud a {
+  color: #777;
+}
