@@ -1,9 +1,9 @@
 <h1><%= @user.user_name %>'s Blocmarks</h1>
 <div class="row my-page">
-  <div class="col-md-4">
+  <div class="col-md-4 my-bookmarks">
     <h2>My Bookmarks</h2>
       <% @bookmarked_topics.each do |topic, bookmarks| %>
-        <h3><%= topic.title %></h3>
+        <h3><%= link_to topic.title, topic_path(topic) %></h3>
         <ul>
           <% bookmarks.each do |bookmark| %>
           <li>
@@ -28,10 +28,12 @@
         </ul>
       <% end %>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-4 my-likes">
     <h2>My Likes</h2>
     <% @liked_bookmarks.each do |topic, liked_bookmarks| %>
-      <h3><%= topic.title %></h3>
+      <h3><%= link_to topic.title, topic_path(topic) %></h3>
       <ul>
         <% liked_bookmarks.each do |bookmark| %>
         <% like = current_user.likes.where(bookmark_id: bookmark).take %>
@@ -58,6 +60,25 @@
           </p>
         <% end %>
       </ul>
+    <% end %>
+  </div>
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-2 my-topics">
+    <h2>My Topics</h2>
+    <% @user.topics.each do |topic| %>
+      <h3><%= topic.title  %></h3>
+      <p class="crud">
+        <% if policy(topic).show? %>
+          <small><%= link_to "Show", topic_path(topic) %></small>
+        <% end %>
+        <% if policy(topic).edit? %>
+          <small><%= link_to "Edit", edit_topic_path(topic) %></small>
+        <% end %>
+        <% if policy(topic).destroy? %>
+          <small><%= link_to "Delete", topic, method: :delete,  data: { confirm: "Are you sure you want to delete this topic?" } %></small>
+        <% end %>
+      </p>
     <% end %>
   </div>
 </div>
