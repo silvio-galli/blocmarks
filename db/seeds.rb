@@ -15,11 +15,14 @@ end
 
 users = User.all
 
-20.times do
-  topic = Topic.create!(
-    title: Faker::Hipster.word,
-    user: users.sample
-  )
+10.times do
+  topic = Topic.new
+  topic.title = Faker::Hipster.word
+  while Topic.where(title: topic.title).exists?
+    topic.title = Faker::Hipster.word
+  end
+  topic.user = users.sample
+  topic.save
 end
 
 me = User.create!(
@@ -34,7 +37,7 @@ member = User.create!(
   password:           "password"
 )
 
-10.times do
+3.times do
   topic = Topic.create!(
     title: Faker::Hipster.word,
     user_id: "6"
@@ -46,7 +49,7 @@ topic = Topic.create!(
   user_id: "6"
 )
 
-10.times do
+3.times do
   topic = Topic.create!(
     title: Faker::Hipster.word,
     user_id: "7"
@@ -55,7 +58,7 @@ end
 
 topics = Topic.all
 
-100.times do
+50.times do
   bookmark = Bookmark.create!(
     url: Faker::Internet.url,
     description: Faker::Hipster.sentence(4, false, 5),
@@ -64,6 +67,25 @@ topics = Topic.all
   )
 end
 
+20.times do
+  bookmark = Bookmark.create!(
+    url: Faker::Internet.url,
+    description: Faker::Hipster.sentence(4, false, 5),
+    user: me,
+    topic: topics.sample
+  )
+end
+
+20.times do
+  bookmark = Bookmark.create!(
+    url: Faker::Internet.url,
+    description: Faker::Hipster.sentence(4, false, 5),
+    user: member,
+    topic: topics.sample
+  )
+end
+
 puts "Seed finished!"
 puts "Blocmarks was populated with #{User.count} new users."
 puts "Blocmarks was populated with #{Topic.count} new topics."
+puts "Blocmarks was populated with #{Bookmark.count} new bookmarks."

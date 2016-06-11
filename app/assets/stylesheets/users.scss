@@ -1,0 +1,48 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.my-page {
+}
+.my-page h2 {
+  font-family: monospace;
+  text-align: center;
+  background-color: #cdc291;
+  border-radius: 5px;
+}
+.my-page h3 {
+  display: inline-block;
+  font-family: serif;
+}
+.my-page h3 a {
+  display: block;
+  padding: 3px 5px;
+  text-decoration: none;
+  -webkit-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  background-color: #524d3a;
+  color: #fff;
+}
+.my-page h3 a:hover {
+  background-color: #fff;
+  color: #524d3a;
+}
+.my-page ul {
+  padding-left: 0;
+}
+.my-page .btn-xs {
+  float: right;
+}
+.my-page ul li {
+  list-style: none;
+}
+.my-topics h3 {
+  color: #000;
+  background-color: #fff;
+  margin-bottom: 0;
+}
+.crud {
+  color: #777;
+}
+.crud a {
+  color: #777;
+}

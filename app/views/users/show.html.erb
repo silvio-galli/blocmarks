@@ -1,0 +1,84 @@
+<h1><%= @user.user_name %>'s Blocmarks</h1>
+<div class="row my-page">
+  <div class="col-md-4 my-bookmarks">
+    <h2>My Bookmarks</h2>
+      <% @bookmarked_topics.each do |topic, bookmarks| %>
+        <h3><%= link_to topic.title, topic_path(topic) %></h3>
+        <ul>
+          <% bookmarks.each do |bookmark| %>
+          <li>
+            <% if bookmark.description != "" %>
+              <%= link_to bookmark.description, bookmark.url %>
+            <% else %>
+              <%= link_to bookmark.url %>
+            <% end %>
+          </li>
+          <p class="crud">
+            <% if policy(bookmark).show? %>
+              <small><%= link_to "Show", bookmark_path(bookmark) %></small>
+            <% end %>
+            <% if policy(bookmark).edit? %>
+              <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+            <% end %>
+            <% if policy(bookmark).destroy? %>
+              <small><%= link_to "Delete", bookmark, method: :delete,  data: { confirm: "Are you sure you want to delete this bookmark?" } %></small>
+            <% end %>
+          </p>
+          <% end %>
+        </ul>
+      <% end %>
+  </div>
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-4 my-likes">
+    <h2>My Likes</h2>
+    <% @liked_bookmarks.each do |topic, liked_bookmarks| %>
+      <h3><%= link_to topic.title, topic_path(topic) %></h3>
+      <ul>
+        <% liked_bookmarks.each do |bookmark| %>
+        <% like = current_user.likes.where(bookmark_id: bookmark).take %>
+        <%= link_to bookmark_like_path(bookmark, like), method: :delete, class: 'btn btn-danger btn-xs' do %>
+          <i class="glyphicon glyphicon-star-empty">&nbsp; Unlike</i>
+        <% end %>
+          <li>
+            <% if bookmark.description != "" %>
+              <%= link_to bookmark.description, bookmark.url %>
+            <% else %>
+              <%= link_to bookmark.url %>
+            <% end %>
+          </li>
+          <p class="crud">
+            <% if policy(bookmark).show? %>
+              <small><%= link_to "Show", bookmark_path(bookmark) %></small>
+            <% end %>
+            <% if policy(bookmark).edit? %>
+              <small><%= link_to "Edit", edit_bookmark_path(bookmark) %></small>
+            <% end %>
+            <% if policy(bookmark).destroy? %>
+              <small><%= link_to "Delete", bookmark, method: :delete,  data: { confirm: "Are you sure you want to delete this bookmark?" } %></small>
+            <% end %>
+          </p>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-2 my-topics">
+    <h2>My Topics</h2>
+    <% @user.topics.each do |topic| %>
+      <h3><%= topic.title  %></h3>
+      <p class="crud">
+        <% if policy(topic).show? %>
+          <small><%= link_to "Show", topic_path(topic) %></small>
+        <% end %>
+        <% if policy(topic).edit? %>
+          <small><%= link_to "Edit", edit_topic_path(topic) %></small>
+        <% end %>
+        <% if policy(topic).destroy? %>
+          <small><%= link_to "Delete", topic, method: :delete,  data: { confirm: "Are you sure you want to delete this topic?" } %></small>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>
