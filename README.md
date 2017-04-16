@@ -1,6 +1,6 @@
 # Blocmarks [![Code Climate](https://codeclimate.com/github/silvio-galli/blocmarks/badges/gpa.svg)](https://codeclimate.com/github/silvio-galli/blocmarks)
 
-Build a production quality social bookmarking app that allows users to email, manage and share bookmarked URLs. Made with the help of my mentor [Charlie Gaines](https://github.com/beaugaines) at [Bloc](http://www.bloc.io).
+Social bookmarking app that allows users to email, manage and share bookmarked URLs. Made with the help of my mentor [Charlie Gaines](https://github.com/beaugaines) at [Bloc](http://www.bloc.io).
 
 [Demo available here](https://obscure-retreat-49704.herokuapp.com/) on Heroku platform.
 
