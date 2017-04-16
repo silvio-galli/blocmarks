@@ -1,2 +1,61 @@
-<h1>Welcome#about</h1>
-<p>Find me in app/views/welcome/about.html.erb</p>
+<h1>Welcome to <%= link_to 'Blocmarks', root_path, title: "Back to home page." %></h1>
+<br>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Sign up is simple and secure</h2>
+      <ol>
+        <li>
+          Fill the <%= link_to 'sign up form', new_user_registration_path, title: '' %> with a <strong>user name</strong>, <strong>your email address</strong> and a <strong>password</strong>.
+        </li>
+        <li>You will receive a confirmation email from <strong>fakeuser049@gmail.com</strong> (the google account we use to send emails for demo projects).</li>
+        <li>Click on the link in the email and you're in!</li>
+      </ol>
+      <p class="lead">
+        Once you have signed-up, you can create new bookmarks via email:
+      </p>
+      <ol>
+        <li>Send an email to <strong>bookmark@sandbox949ce29fdaa14bcba6bda6b5bed519d8.mailgun.org</strong></li>
+        <li>Write the topic related to the bookmark in the subject of the email.</li>
+        <li>
+          In the body of the email write:
+          <ul>
+            <li>first line: bookmark address</li>
+            <li>second line: description for the new bookmark</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <div class="col-md-6">
+      <h2>You do not feel comfortable and want to test Blocipedia without sign up?</h2>
+      <p>
+        Clone Blocmarks repository:
+      </p>
+      <ol>
+        <li>create the folder where you want to clone the repository;</li>
+        <li>open a terminal window and <code>change directory to the newly created folder</code>;</li>
+        <li>run <code>git clone https://github.com/silvio-galli/blocmarks.git</code> in the terminal window;</li>
+        <li>after cloning, run <code>rails s</code> in the terminal window;</li>
+        <li>open <code>localhost:3000</code> in your favourite browser;</li>
+        <li>
+          sign in as a demo user:
+          <ul>
+            <li>user: <em>fake@example.com</em>, password: <em>password</em></li>
+            <strong>OR</strong>
+            <li>user: <em>member@example.com</em>, password: <em>password</em></li>
+          </ul>
+        </li>
+      </ol>
+      <p class="lead">Demo users are not allowed to create bookmarks via email.</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <p class="lead">
+      <small>
+        We won't store your data or give them to anybody. If you decide to cancel from Blocmarks your data will be permanently deleted.
+      </small>
+    </p>
+  </div>
+</div>
